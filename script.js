@@ -1,17 +1,23 @@
 let taskList = []
+let Removed = []
 
-window.onload = function () {
+$(() => {
 
   //Refresh List
   function RefreshList() {
-    ulTasks.innerHTML = ''
+    ulTasks.html("");
     for (let task of taskList) {
+      // console.log(task)
       let listItem = $('<li>', {
         'class': 'list-group-item',
-        text: inpNewTask.val()
+        text: task
       })
+      // console.log((listItem.text()))
       listItem.click(() => {
         listItem.toggleClass('done')
+        Removed.push(listItem.text())
+        let idx =taskList.indexOf(listItem.text())
+        taskList.splice(idx,1)
       })
       ulTasks.append(listItem)
       inpNewTask.val('')
@@ -21,7 +27,7 @@ window.onload = function () {
 
   //add function
   function addItem(){
-    taskList.push(inpNewTask.value)
+    taskList.push(inpNewTask.val())
     RefreshList()
     localStorage.task = taskList.join(',')
   }
@@ -29,6 +35,7 @@ window.onload = function () {
   //clearing list
   function deleteAll() {
     taskList.splice(0, taskList.length)
+    Removed.splice(0, Removed.length)
     RefreshList()
     localStorage.removeItem("task")
   }
@@ -36,6 +43,9 @@ window.onload = function () {
   //clear function for removing striked data
   function clearDone() {
     $('#ulTasks .done').remove()
+    Removed.splice(0, Removed.length)
+    localStorage.task = taskList.join(',')
+    RefreshList()
     toggleInputButtons()
   }
 
@@ -43,7 +53,7 @@ window.onload = function () {
   function sortTasks() {
     $('#ulTasks .done').appendTo(ulTasks)
   }
-  
+
 
   //designing btns
   function toggleInputButtons() {
@@ -60,7 +70,7 @@ window.onload = function () {
   let btnSort = $('#btnSort')
   let btnCleanup = $('#btnCleanup')
   let inpNewTask = $('#inpNewTask')
-  let clearall = document.getElementById('clearall')
+  let clearall = $('#clearall')
 
 
   //handling enter key
@@ -84,4 +94,4 @@ window.onload = function () {
   btnCleanup.click(clearDone)
   btnSort.click(sortTasks)
   clearall.click (deleteAll)
-}
+})
