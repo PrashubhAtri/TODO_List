@@ -6,9 +6,9 @@ This is Normal TODO list online created by me.<br>
 1. You can add a task by describing it the input box and pressing 
    the **Add button** or the **Enter Key**.
 2. The **Reset Button** can be used to empty the text box.
-3. The **Sort Button** sort the tasks as completed and incomplete.
+3. The **Sort Button** sorts the tasks as completed or incomplete.
 4. The **Clean Up Button** removes the completed Tasks.
-5. The **Clear List** Cleans the whole List.
+5. The **Clear List** deletes the whole List.
 
 ## Tasks
 ![Display of List](imgs/tasks.jpg)
