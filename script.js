@@ -15,9 +15,15 @@ $(() => {
       // console.log((listItem.text()))
       listItem.click(() => {
         listItem.toggleClass('done')
-        Removed.push(listItem.text())
-        let idx =taskList.indexOf(listItem.text())
-        taskList.splice(idx,1)
+        if(taskList.indexOf(listItem.text())+1){
+          Removed.push(listItem.text())
+          let idx =taskList.indexOf(listItem.text())
+          taskList.splice(idx,1)
+        }else{
+          taskList.push(listItem.text())
+          let idx =Removed.indexOf(listItem.text())
+          Removed.splice(idx,1)
+        }
       })
       ulTasks.append(listItem)
       inpNewTask.val('')
